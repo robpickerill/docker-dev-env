@@ -1,0 +1,18 @@
+---
+
+version: "3"
+
+services:
+  jenkins-master:
+    container_name: jenkins-master
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    restart: on-failure
+    volumes:
+      - "data-jenkins:/var/jenkins_home"
+
+volumes:
+  data-jenkins:
+    driver: "local"
