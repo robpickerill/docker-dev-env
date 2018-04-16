@@ -1,9 +1,8 @@
 ---
 
-version: "3"
+version: "3.6"
 
 services:
-
   jenkins-master:
     container_name: jenkins-master
     image: jenkins/jenkins:latest
@@ -11,15 +10,12 @@ services:
       - "8080:8080"
       - "50000:50000"
     restart: on-failure
-    volumes:
-      - "data-jenkins:/var/jenkins_home"
-
-volumes:
-  data-jenkins:
-    driver: "local"
+    secrets:
+      - jenkins-user
+      - jenkins-pass
 
 secrets:
   jenkins-user:
-    external: true
+    file: ./secrets/jenkins-user
   jenkins-pass:
-    external: true
+    file: ./secrets/jenkins-pass
