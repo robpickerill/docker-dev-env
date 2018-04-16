@@ -3,6 +3,7 @@
 version: "3"
 
 services:
+
   jenkins-master:
     container_name: jenkins-master
     image: jenkins/jenkins:latest
@@ -16,3 +17,9 @@ services:
 volumes:
   data-jenkins:
     driver: "local"
+
+secrets:
+  jenkins-user:
+    external: true
+  jenkins-pass:
+    external: true
