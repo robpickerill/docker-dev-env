@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  jenkins:
+    build: 
+      context: ./jenkins-master/
+      dockerfile: Dockerfile
+    image: jenkins-master:latest
+    container_name: jenkins-master
+    image: jenkins/jenkins:alpine
+    restart: always
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /home/rob/.docker-dev-env/jenkins-master/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    network:
+      - jenkins-network
+
+networks:
+  custom_network:
+    external:
+      name: jenkins-network
